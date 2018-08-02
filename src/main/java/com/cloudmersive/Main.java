@@ -3,6 +3,7 @@ package com.cloudmersive;
 import com.cloudmersive.client.*;
 import com.cloudmersive.client.model.*;
 import com.cloudmersive.client.invoker.*;
+import com.cloudmersive.client.invoker.auth.*;
 import java.io.*;
 
 public class Main {
@@ -28,6 +29,26 @@ public class Main {
 
         try
         {
+            // Customer
+
+            ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+            // Configure API key authorization: Apikey
+            ApiKeyAuth Apikey = (ApiKeyAuth) defaultClient.getAuthentication("Apikey");
+            Apikey.setApiKey("f0c513bc-8c00-4491-830e-3e83b015feb6");
+
+            ConvertDocumentApi apiInstance = new ConvertDocumentApi();
+            File inputFile = new File("C:\\temp\\input.docx"); // File | Input file to perform the operation on.
+            try {
+                Object result = apiInstance.convertDocumentDocxToPdf(inputFile);
+                System.out.println(result);
+            } catch (ApiException e) {
+                System.err.println("Exception when calling ConvertDocumentApi#convertDocumentDocxToPdf");
+                e.printStackTrace();
+            }
+
+
+
             // Email API
 
             EmailApi api = new EmailApi(client);
@@ -46,17 +67,7 @@ public class Main {
             GenerateBarcodeApi generate = new GenerateBarcodeApi(client);
             generate.generateBarcodeEAN8("96385074");
 
-            // Convert API
 
-            ConvertDocumentApi docApi = new ConvertDocumentApi(client);
-
-            ScreenshotRequest req = new ScreenshotRequest();
-            req.setUrl("https://api.cloudmersive.com/csharp-client.asp");
-
-            ConvertWebApi webApi = new ConvertWebApi(client);
-            File output = webApi.convertWebUrlToPdf(req);
-
-            System.out.println(output.getPath());
         }
         catch (Exception e)
         {
