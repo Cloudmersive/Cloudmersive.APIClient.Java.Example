@@ -12,7 +12,9 @@ public class Main {
         ApiClient client = new ApiClient();
         client.addDefaultHeader("Apikey", "14343416-776b-40e8-b6d7-6ffaa0bd70f9");
 
-
+        client.setReadTimeout(300000);
+        client.setWriteTimeout(300000);
+        client.setConnectTimeout(300000);
 
 //        ApiKeyAuth auth = (ApiKeyAuth)client.getAuthentication("key");
 //        auth.setApiKey("14343416-776b-40e8-b6d7-6ffaa0bd70f9");
